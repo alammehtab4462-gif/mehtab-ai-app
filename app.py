@@ -1,61 +1,92 @@
 import streamlit as st
-import requests
-import json
+import google.generativeai as genai
+import os
 
-st.set_page_config(page_title="Mehtab Pro AI Workstation", page_icon="🚀", layout="centered")
+# Page Configuration (Mobile Friendly Layout)
+st.set_page_config(page_title="Mehtab AI Workstation", page_icon="🚀", layout="centered")
 
-API_KEY = "AIzaSyAESg2hzplWZS7BtP30TvcEKnKLoKH9udo"
-url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={API_KEY}"
+# Custom UI Styling
+st.markdown("""
+    <style>
+    .main-title { font-size: 28px; font-weight: bold; color: #FF4B4B; text-align: center; margin-bottom: 20px; }
+    .stButton>button { width: 100%; border-radius: 8px; font-weight: bold; }
+    </style>
+""", unsafe_allow_html=True)
 
-st.title("🚀 Mehtab Bhai Ka Pro AI Workstation")
-st.markdown("---")
+st.markdown('<div class="main-title">🚀 Mehtab Bhai Ka Pro AI Workstation</div>', unsafe_allow_html=True)
 
-st.subheader("🎬 Apna Channel Ya Mood Chunein")
-option = st.selectbox(
-    "Kis channel ke liye content banana hai?",
-    ("The Future India 🇮🇳 (Tech & Future)", "Aam Zindagi 🎬 (Comedy & Shorts)", "Plumbing Business 🛠️ (Professional Ads)", "General Query 🌍 (Normal Sawaal)")
-)
+# API Key Config
+API_KEY = ""
+if st.secrets and len(st.secrets) > 0:
+    API_KEY = list(st.secrets.values())[0]
 
-if "The Future India" in option:
-    channel_name = "The Future India"
-    system_instruction = "Tum ek futuristic, high-energy aur patriotic YouTube channel ke content creator ho. Jawab me dhamakedar viral video ideas, scripts aur tags do."
-elif "Aam Zindagi" in option:
-    channel_name = "Aam Zindagi"
-    system_instruction = "Tum ek majedar, comedy aur highly relatable social media creator ho jo aam logon ki zindagi par shorts banata hai. Jawab ekdum desi, funny aur catchy hona chahiye."
-elif "Plumbing Business" in option:
-    channel_name = "Plumbing Business"
-    system_instruction = "Tum ek professional business marketing expert ho. Plumbing services, bathroom installations aur customer attraction ke liye taglines, ideas ya ads likho."
+if not API_KEY:
+    API_KEY = os.environ.get("GEMINI_API_KEY", "")
+
+if API_KEY:
+    genai.configure(api_key=API_KEY)
 else:
-    channel_name = "General Query"
-    system_instruction = "Tum ek helpful AI assistant ho. User ke sawaal ka seedha aur badiya jawab Hindi me do."
+    st.error("🔑 API Key nahi mili! Kripya Streamlit Settings mein apni Key set karein.")
 
-st.subheader("📁 Media Attachment (Optional)")
-uploaded_file = st.file_uploader("Agar kisi photo ya video par script chahiye toh yahan upload karein", type=["jpg", "jpeg", "png", "mp4"])
+if "form_reset" not in st.session_state:
+    st.session_state.form_reset = False
+
+def reset_callback():
+    st.session_state.form_reset = True
+
+# App UI Options
+channel = st.selectbox("🎬 Apna Channel Ya Mood Chunein", [
+    "General Query 🌍 (Normal Sawaal)",
+    "The Future India 🇮🇳 (Tech & Future)",
+    "Aam Zindagi 🎬 (Comedy & Shorts)",
+    "Plumbing Services 🛠️ (Professional Ads)"
+])
+
+# File Upload Section
+uploaded_file = st.file_uploader("📁 Media Attachment (Optional)", type=["jpg", "png", "mp4"])
 
 if uploaded_file is not None:
-    st.success(f"✅ {uploaded_file.name} successfully attach ho gayi hai!")
+    file_type = uploaded_file.type.split('/')[0]
+    if file_type == "image":
+        st.image(uploaded_file, caption="Uploaded Image Preview", use_container_width=True)
+    elif file_type == "video":
+        st.video(uploaded_file, format="video/mp4")
 
-st.subheader(f"📝 [{channel_name}] Ka Topic")
-user_topic = st.text_input("Mehtab bhai, aaj kis cheez par video ya ad banana hai? Yahan type karein:")
+# Text input box logic
+input_key = "user_prompt_new" if st.session_state.form_reset else "user_prompt_default"
+prompt = st.text_input(f"📝 Topic", placeholder="Mehtab bhai, aaj kis cheez par video banana hai?", key=input_key)
 
-if st.button("🔥 Generate AI Content"):
-    if user_topic:
-        hukum = f"Role: {system_instruction}\nTopic: {user_topic}\n\nMujhe ispar badiya content bana kar do Hindi me."
-        payload = {"contents": [{"parts": [{"text": hukum}]}]}
-        headers = {'Content-Type': 'application/json'}
-        st.info("⚡ Gemini Server se connect ho raha hai... Thoda rukiye...")
-        try:
-            response = requests.post(url, headers=headers, data=json.dumps(payload))
-            if response.status_code == 200:
-                res = response.json()
-                jawab = res['candidates'][0]['content']['parts'][0]['text']
-                st.success("🎉 Hamara AI Jawab Taiyar Hai!")
-                st.markdown(f"### 📢 {channel_name} Special Content:")
-                st.write(jawab)
-                st.download_button(label="📥 Is Script Ko Save (Download) Karein", data=jawab, file_name=f"{channel_name}_script.txt", mime="text/plain")
-            else:
-                st.error(f"Server ne error diya: {response.status_code}")
-        except Exception as e:
-            st.error(f"Kuch dikkat aayi bhai: {e}")
+col1, col2 = st.columns(2)
+with col1:
+    generate_click = st.button("🔥 Generate AI Content")
+with col2:
+    clear_click = st.button("🗑️ Reset / Clear All", on_click=reset_callback)
+
+if st.session_state.form_reset:
+    st.session_state.form_reset = False
+    st.rerun()
+
+# Processing AI Request
+if generate_click:
+    if not prompt and not uploaded_file:
+        st.warning("⚠️ Kripya koi prompt likhein ya file upload karein!")
+    elif not API_KEY:
+        st.error("⚠️ AI Connect nahi ho sakta kyunki API Key missing hai.")
     else:
-        st.warning("Mehtab bhai, pehle neeche wale box me kuch topic toh likho!")
+        with st.spinner("⚡ Gemini Server se connect ho raha hai..."):
+            try:
+                model = genai.GenerativeModel("gemini-1.5-flash")
+                content_parts = []
+                if uploaded_file:
+                    bytes_data = uploaded_file.read()
+                    content_parts.append({"mime_type": uploaded_file.type, "data": bytes_data})
+                if prompt:
+                    content_parts.append(prompt)
+                
+                response = model.generate_content(content_parts)
+                st.balloons()
+                st.success("🎉 Hamara Al Jawab Taiyar Hai!")
+                st.markdown("### 📢 Special Content:")
+                st.write(response.text)
+            except Exception as e:
+                st.error(f"❌ Error aaya bhai: {str(e)}")
