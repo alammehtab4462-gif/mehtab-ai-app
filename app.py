@@ -75,7 +75,7 @@ if generate_click:
     else:
         with st.spinner("⚡ Gemini Server se connect ho raha hai..."):
             try:
-                model = genai.GenerativeModel("gemini-1.5-flash")
+                model = genai.GenerativeModel("gemini-2.5-flash")
                 content_parts = []
                 if uploaded_file:
                     bytes_data = uploaded_file.read()
