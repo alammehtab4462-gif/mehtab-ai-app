@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 
 # Page Configuration for Mobile View Look
-st.set_page_config(page_title="Premium Salon Booking", page_icon="✂️", layout="centered")
+st.set_page_config(page_title="Master Cutz Salon", page_icon="✂️", layout="centered")
 
 # Custom Styling for Salon Look (Dark Gold & Luxury Black Theme)
 st.markdown("""
@@ -45,8 +45,8 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Header Section
-st.markdown('<div class="salon-title">✂️ MEHTAB PREMIUM SALON</div>', unsafe_allow_html=True)
+# Header Section (Naam Badal Diya Hai)
+st.markdown('<div class="salon-title">✂️ MASTER CUTZ SALON</div>', unsafe_allow_html=True)
 st.markdown('<div class="salon-sub">Style Jo Aapko Sabse Alag Banaye | Book Your Slot</div>', unsafe_allow_html=True)
 
 # Initialize a database in system memory to store appointments
@@ -119,3 +119,4 @@ with tab2:
         if st.button("🗑️ Reset Register (Clear All Bookings)", use_container_width=True):
             st.session_state.salon_bookings = []
             st.rerun()
+
