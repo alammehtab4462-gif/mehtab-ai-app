@@ -1,4 +1,4 @@
-import streamlit as st
+            import streamlit as st
 from datetime import datetime
 
 # Page Configuration for Mobile View Look
@@ -49,17 +49,16 @@ st.markdown("""
 st.markdown('<div class="salon-title">✂️ MEHTAB PREMIUM SALON</div>', unsafe_allow_html=True)
 st.markdown('<div class="salon-sub">Style Jo Aapko Sabse Alag Banaye | Book Your Slot</div>', unsafe_allow_html=True)
 
-# Initialize a fake database in system memory to store appointments
+# Initialize a database in system memory to store appointments
 if "salon_bookings" not in st.session_state:
     st.session_state.salon_bookings = []
 
 # Create Tabs for Customer Booking and Owner Dashboard
-tab1, tab2 = st.tabs(["📅 Book Appointment", "👑 Owner Dashboard (Dukaan Ke Liye)"])
+tab1, tab2 = st.tabs(["📅 Book Appointment", "👑 Owner Dashboard"])
 
 with tab1:
     st.markdown("### ✨ Hamari VIP Services")
     
-    # Displaying Services Beautifully
     st.markdown('<div class="service-box"><b>💇‍♂️ Hair Cut (Trending Styles)</b><br>Price: ₹120 | Time: 20 Mins</div>', unsafe_allow_html=True)
     st.markdown('<div class="service-box"><b>🧔 Beard Grooming & Styling</b><br>Price: ₹80 | Time: 15 Mins</div>', unsafe_allow_html=True)
     st.markdown('<div class="service-box"><b>💆‍♂️ Premium Hair Spa & Massage</b><br>Price: ₹250 | Time: 30 Mins</div>', unsafe_allow_html=True)
@@ -68,7 +67,6 @@ with tab1:
     st.markdown("---")
     st.markdown("### 📝 Apni Details Bharein")
     
-    # Booking Form
     customer_name = st.text_input("👤 Aapka Naam", placeholder="Apna pura naam likhein")
     customer_phone = st.text_input("📞 Mobile Number", placeholder="9876XXXXXX")
     
@@ -90,7 +88,6 @@ with tab1:
         if not customer_name or not customer_phone or not selected_services:
             st.error("⚠️ Kripya Naam, Number aur Service zaroor chunein bhai!")
         else:
-            # Save booking info
             new_booking = {
                 "name": customer_name,
                 "phone": customer_phone,
@@ -100,11 +97,10 @@ with tab1:
                 "status": "Confirmed ✅"
             }
             st.session_state.salon_bookings.append(new_booking)
-            st.markdown(f'<div class="booking-success">🎉 Badhai Ho {customer_name}! Aapka Slot ({booking_time}) Confirm Ho Gaya Hai. Time Par Pahunchein!</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="booking-success">🎉 Badhai Ho {customer_name}! Aapka Slot ({booking_time}) Confirm Ho Gaya Hai.</div>', unsafe_allow_html=True)
 
 with tab2:
     st.markdown("### 👑 Aaj Ki Kul Appointments (Dukaan Ka Register)")
-    st.write("Yeh section sirf aapke dost ke liye hai, jahan wo dekh sakte hain kis customer ka booking kab hai.")
     
     if len(st.session_state.salon_bookings) == 0:
         st.info("📭 Abhi tak koi naya appointment book nahi hua hai bhai.")
