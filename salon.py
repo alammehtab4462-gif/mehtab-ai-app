@@ -27,12 +27,30 @@ st.markdown("""
         text-align: center;
         margin-bottom: 25px;
     }
+    .section-header {
+        font-size: 18px;
+        font-weight: bold;
+        color: #F59E0B;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #F59E0B;
+        padding-bottom: 5px;
+        text-transform: uppercase;
+    }
     .service-box {
         background-color: #1F2937;
-        padding: 15px;
-        border-radius: 12px;
-        border-left: 5px solid #F59E0B;
-        margin-bottom: 12px;
+        padding: 12px;
+        border-radius: 8px;
+        border-left: 4px solid #F59E0B;
+        margin-bottom: 8px;
+    }
+    .offer-box {
+        background-color: #292524;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px dashed #F59E0B;
+        margin-bottom: 8px;
+        text-align: center;
     }
     .whatsapp-btn {
         display: block;
@@ -69,15 +87,45 @@ st.markdown('<div class="salon-sub">Style Jo Aapko Sabse Alag Banaye | Book Your
 if "salon_bookings" not in st.session_state:
     st.session_state.salon_bookings = []
 
-# DO DASHBOARD WAPAS LE AAYA HOON BHAI (Tabs)
+# Tabs Configuration
 tab1, tab2 = st.tabs(["📅 Book Appointment", "👑 Owner Dashboard"])
 
 with tab1:
-    st.markdown("### ✨ Hamari VIP Services")
-    st.markdown('<div class="service-box"><b>💇‍♂️ Hair Cut (Trending Styles)</b><br>Price: ₹120 | Time: 20 Mins</div>', unsafe_allow_html=True)
-    st.markdown('<div class="service-box"><b>🧔 Beard Grooming & Styling</b><br>Price: ₹80 | Time: 15 Mins</div>', unsafe_allow_html=True)
-    st.markdown('<div class="service-box"><b>💆‍♂️ Premium Hair Spa & Massage</b><br>Price: ₹250 | Time: 30 Mins</div>', unsafe_allow_html=True)
-    st.markdown('<div class="service-box"><b>🌟 Charcoal Facial & Glow</b><br>Price: ₹300 | Time: 25 Mins</div>', unsafe_allow_html=True)
+    # 1. Standard Services Menu
+    st.markdown('<div class="section-header">📜 Our Menu & Price List</div>', unsafe_allow_html=True)
+    
+    services_list = [
+        "Classic Hair Cut (₹100)", "Beard / Shave (₹50)", "Hair Wash (₹30)", 
+        "Clean Up (₹50)", "Hair Dryer (₹30)", "Hair / Beard Color (₹250)", 
+        "Keratin / Hair Spa (₹500)", "Keratin / Hair Spa (₹900)", 
+        "Head / Body Massage (₹100)", "D Tan (₹150)", "D Tan (₹250)", 
+        "Facial (₹600)", "Facial (₹1100)", "Special Hair Color (₹800)", 
+        "Hair Straightening (₹1200)", "Wax (₹150)", "Wax (₹250)", 
+        "Wax Beard (₹100)", "Wax Beard (₹150)"
+    ]
+    
+    st.markdown('<div class="service-box"><b>💇‍♂️ Hair & Beard Basics</b><br>Classic Hair Cut: ₹100 | Beard/Shave: ₹50 | Hair Wash: ₹30</div>', unsafe_allow_html=True)
+    st.markdown('<div class="service-box"><b>🌟 Grooming & Spa</b><br>Clean Up: ₹50 | Hair Spa: ₹500/₹900 | Facial: ₹600/₹1100</div>', unsafe_allow_html=True)
+    st.markdown('<div class="service-box"><b>🔥 Styling & Colors</b><br>Hair Color: ₹250 | Special Color: ₹800 | Straightening: ₹1200</div>', unsafe_allow_html=True)
+
+    # 2. Mastercutz Special Combos
+    st.markdown('<div class="section-header">⭐ Mastercutz Special Combos</div>', unsafe_allow_html=True)
+    combos_list = [
+        "Combo 1: Hair + Beard + D Tan + Head Massage (₹350)",
+        "Combo 2: Hair + Beard + D Tan + Head Massage (₹450)",
+        "Combo 3: Hair Cut + Beard Cut + Color (₹350)",
+        "Combo 4: Hair Cut + Beard Cut + Color + D Tan (₹500)"
+    ]
+    st.markdown('<div class="service-box"><b>🎁 Hair/Beard/D Tan/Head Massage</b><br>Price: ₹350 / ₹450</div>', unsafe_allow_html=True)
+    st.markdown('<div class="service-box"><b>🎁 Hair Cut + Beard Cut + Color</b><br>Price: ₹350</div>', unsafe_allow_html=True)
+    st.markdown('<div class="service-box"><b>🎁 Hair Cut + Beard Cut + Color + D Tan</b><br>Price: ₹500</div>', unsafe_allow_html=True)
+
+    # 3. Special Offers Display
+    st.markdown('<div class="section-header">💥 Special Offers Only for You</div>', unsafe_allow_html=True)
+    st.markdown('<div class="offer-box"><b style="color: #F59E0B; font-size: 16px;">📅 ONLY TUESDAY OFFER</b><br><span style="font-size: 20px; font-weight: bold; color: #34D399;">20% OFF</span> ON TOTAL BILL</div>', unsafe_allow_html=True)
+    st.markdown('<div class="offer-box"><b style="color: #F59E0B; font-size: 16px;">🤵 GROOM SPECIAL OFFER</b><br>Complete Package for <span style="font-size: 18px; font-weight: bold; color: #34D399;">₹2000/- Only</span></div>', unsafe_allow_html=True)
+
+    all_options = services_list + combos_list + ["ONLY TUESDAY OFFER (20% OFF)", "GROOM SPECIAL OFFER (₹2000)"]
 
     st.markdown("---")
     st.markdown("### 📝 Apni Details Bharein")
@@ -85,11 +133,11 @@ with tab1:
     customer_name = st.text_input("👤 Aapka Naam", placeholder="Apna pura naam likhein")
     customer_phone = st.text_input("📞 Mobile Number", placeholder="9876XXXXXX")
 
-    selected_services = st.multiselect("✂️ Jo Service Chahiye Use Chunein", 
-        ["Hair Cut (₹120)", "Beard Grooming (₹80)", "Hair Spa (₹250)", "Charcoal Facial (₹300)"])
+    selected_services = st.multiselect("✂️ Choose Services / Combos / Offers", all_options)
 
+    # YAHAN SE 'EXPERT' WORD HATA DIYA HAI BHAI
     selected_barber = st.selectbox("💈 Apna Pasandida Karigar (Stylist) Chunein", [
-        "Mubarak (Main Expert)",
+        "Mubarak (Main)",
         "Other Karigar 1",
         "Other Karigar 2",
         "Koi bhi chalega (Any Available)"
@@ -106,14 +154,12 @@ with tab1:
 
     st.markdown("---")
 
-    # Owner Ka Number Set Hai
     owner_whatsapp_number = "918299250469" 
 
     if st.button("🔥 Booking Message Taiyar Karein", use_container_width=True):
         if not customer_name or not customer_phone or not selected_services:
-            st.error("⚠️ Kripya Naam, Number aur Service zaroor chunein bhai!")
+            st.error("⚠️ Kripya Naam, Number aur Service/Combo zaroor chunein bhai!")
         else:
-            # 1. Register me entry save karna
             services_string = ", ".join(selected_services)
             new_booking = {
                 "name": customer_name,
@@ -126,12 +172,11 @@ with tab1:
             }
             st.session_state.salon_bookings.append(new_booking)
             
-            # 2. WhatsApp message banana
             raw_message = (
                 f"👋 *Master Cutz Salon - Nayi Booking!*\n\n"
                 f"👤 *Customer Name:* {customer_name}\n"
                 f"📞 *Phone:* {customer_phone}\n"
-                f"✂️ *Services:* {services_string}\n"
+                f"✂️ *Selected Items:* {services_string}\n"
                 f"💈 *Karigar (Stylist):* {selected_barber}\n"
                 f"📅 *Date:* {str(booking_date)}\n"
                 f"⏰ *Time Slot:* {booking_time}\n\n"
@@ -142,8 +187,6 @@ with tab1:
             whatsapp_url = f"https://wa.me/{owner_whatsapp_number}?text={encoded_message}"
             
             st.markdown(f'<div class="booking-success">🎉 Data Save Ho Gaya Hai!</div>', unsafe_allow_html=True)
-            
-            # Big Green WhatsApp Button
             st.markdown(f'<a href="{whatsapp_url}" target="_blank" class="whatsapp-btn">💬 Send Booking on WhatsApp</a>', unsafe_allow_html=True)
 
 with tab2:
@@ -157,7 +200,7 @@ with tab2:
             <div style="background-color: #1F2937; padding: 15px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #374151;">
                 <h4>{idx+1}. {booking['name']} ({booking['time']})</h4>
                 <p>📞 <b>Phone:</b> {booking['phone']}</p>
-                <p>✂️ <b>Services:</b> {booking['services']}</p>
+                <p>✂️ <b>Services/Offers:</b> {booking['services']}</p>
                 <p>💈 <b>Karigar:</b> {booking['barber']}</p>
                 <p>📅 <b>Date:</b> {booking['date']}</p>
                 <p>🟢 <b>Status:</b> <span style="color: #34D399;">{booking['status']}</span></p>
