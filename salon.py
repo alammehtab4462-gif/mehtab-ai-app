@@ -81,13 +81,13 @@ st.markdown("""
 
 # Header Section
 st.markdown('<div class="salon-title">✂️ MASTER CUTZ SALON</div>', unsafe_allow_html=True)
-st.markdown('<div class="salon-sub">Style Jo Aapko Sabse Alag Banaye | Book Your Slot</div>', unsafe_allow_html=True)
+st.markdown('<div class="salon-sub">Style That Makes You Stand Out | Book Your Slot</div>', unsafe_allow_html=True)
 
 # Initialize database for Owner Dashboard (Register)
 if "salon_bookings" not in st.session_state:
     st.session_state.salon_bookings = []
 
-# Tabs Configuration
+# Tabs Configuration (English Headers)
 tab1, tab2 = st.tabs(["📅 Book Appointment", "👑 Owner Dashboard"])
 
 with tab1:
@@ -127,25 +127,24 @@ with tab1:
 
     all_options = services_list + combos_list + ["ONLY TUESDAY OFFER (20% OFF)", "GROOM SPECIAL OFFER (₹2000)"]
 
-    st.markdown("---")
-    st.markdown("### 📝 Apni Details Bharein")
+    # --- SAARI DETAILS AB ENGLISH MEIN HAI ---
+    st.markdown('<div class="section-header">📝 Enter Your Details</div>', unsafe_allow_html=True)
 
-    customer_name = st.text_input("👤 Aapka Naam", placeholder="Apna pura naam likhein")
-    customer_phone = st.text_input("📞 Mobile Number", placeholder="9876XXXXXX")
+    customer_name = st.text_input("👤 Full Name", placeholder="Enter your full name here")
+    customer_phone = st.text_input("📞 Mobile Number", placeholder="Enter 10-digit mobile number")
 
     selected_services = st.multiselect("✂️ Choose Services / Combos / Offers", all_options)
 
-    # YAHAN SE 'EXPERT' WORD HATA DIYA HAI BHAI
-    selected_barber = st.selectbox("💈 Apna Pasandida Karigar (Stylist) Chunein", [
+    selected_barber = st.selectbox("💈 Select Your Stylist (Karigar)", [
         "Mubarak (Main)",
-        "Other Karigar 1",
-        "Other Karigar 2",
-        "Koi bhi chalega (Any Available)"
+        "Other Stylist 1",
+        "Other Stylist 2",
+        "Any Available"
     ])
 
-    booking_date = st.date_input("📆 Din Chunein", min_value=datetime.today())
+    booking_date = st.date_input("📆 Select Date", min_value=datetime.today())
 
-    booking_time = st.selectbox("⏰ Apna Time Slot Chunein", [
+    booking_time = st.selectbox("⏰ Select Time Slot", [
         "09:00 AM - 10:00 AM", "10:00 AM - 11:00 AM", "11:00 AM - 12:00 PM",
         "12:00 PM - 01:00 PM", "02:00 PM - 03:00 PM", "03:00 PM - 04:00 PM",
         "04:00 PM - 05:00 PM", "05:00 PM - 06:00 PM", "06:00 PM - 07:00 PM",
@@ -156,9 +155,9 @@ with tab1:
 
     owner_whatsapp_number = "918299250469" 
 
-    if st.button("🔥 Booking Message Taiyar Karein", use_container_width=True):
+    if st.button("🔥 Generate Booking Message", use_container_width=True):
         if not customer_name or not customer_phone or not selected_services:
-            st.error("⚠️ Kripya Naam, Number aur Service/Combo zaroor chunein bhai!")
+            st.error("⚠️ Please fill in your Name, Phone, and choose at least one Service!")
         else:
             services_string = ", ".join(selected_services)
             new_booking = {
@@ -173,27 +172,27 @@ with tab1:
             st.session_state.salon_bookings.append(new_booking)
             
             raw_message = (
-                f"👋 *Master Cutz Salon - Nayi Booking!*\n\n"
+                f"👋 *Master Cutz Salon - New Booking!*\n\n"
                 f"👤 *Customer Name:* {customer_name}\n"
                 f"📞 *Phone:* {customer_phone}\n"
                 f"✂️ *Selected Items:* {services_string}\n"
-                f"💈 *Karigar (Stylist):* {selected_barber}\n"
+                f"💈 *Stylist (Karigar):* {selected_barber}\n"
                 f"📅 *Date:* {str(booking_date)}\n"
                 f"⏰ *Time Slot:* {booking_time}\n\n"
-                f"Kripya mera slot confirm karein! 🙏"
+                f"Please confirm my booking slot! 🙏"
             )
             
             encoded_message = urllib.parse.quote(raw_message)
             whatsapp_url = f"https://wa.me/{owner_whatsapp_number}?text={encoded_message}"
             
-            st.markdown(f'<div class="booking-success">🎉 Data Save Ho Gaya Hai!</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="booking-success">🎉 Data Saved Successfully!</div>', unsafe_allow_html=True)
             st.markdown(f'<a href="{whatsapp_url}" target="_blank" class="whatsapp-btn">💬 Send Booking on WhatsApp</a>', unsafe_allow_html=True)
 
 with tab2:
-    st.markdown("### 👑 Aaj Ki Kul Appointments (Dukaan Ka Register)")
+    st.markdown("### 👑 Today's Appointments (Salon Register)")
     
     if len(st.session_state.salon_bookings) == 0:
-        st.info("📭 Abhi tak koi nayi booking nahi hui hai bhai.")
+        st.info("📭 No new bookings for today yet.")
     else:
         for idx, booking in enumerate(st.session_state.salon_bookings):
             st.markdown(f"""
@@ -201,7 +200,7 @@ with tab2:
                 <h4>{idx+1}. {booking['name']} ({booking['time']})</h4>
                 <p>📞 <b>Phone:</b> {booking['phone']}</p>
                 <p>✂️ <b>Services/Offers:</b> {booking['services']}</p>
-                <p>💈 <b>Karigar:</b> {booking['barber']}</p>
+                <p>💈 <b>Stylist:</b> {booking['barber']}</p>
                 <p>📅 <b>Date:</b> {booking['date']}</p>
                 <p>🟢 <b>Status:</b> <span style="color: #34D399;">{booking['status']}</span></p>
             </div>
