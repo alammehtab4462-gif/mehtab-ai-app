@@ -17,12 +17,21 @@ st.markdown("""
         font-weight: 800;
         color: #F59E0B;
         text-align: center;
-        margin-bottom: 5px;
+        margin-bottom: 2px;
         text-transform: uppercase;
         letter-spacing: 2px;
     }
+    .salon-owner {
+        font-size: 16px;
+        font-weight: 600;
+        color: #E5E7EB;
+        text-align: center;
+        margin-bottom: 5px;
+        font-style: italic;
+        letter-spacing: 1px;
+    }
     .salon-sub {
-        font-size: 14px;
+        font-size: 13px;
         color: #9CA3AF;
         text-align: center;
         margin-bottom: 25px;
@@ -79,15 +88,16 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Header Section
+# Header Section (Added Owner Name Here)
 st.markdown('<div class="salon-title">✂️ MASTER CUTZ SALON</div>', unsafe_allow_html=True)
+st.markdown('<div class="salon-owner">Owned by Khan Sahab</div>', unsafe_allow_html=True)
 st.markdown('<div class="salon-sub">Style That Makes You Stand Out | Book Your Slot</div>', unsafe_allow_html=True)
 
 # Initialize database for Owner Dashboard (Register)
 if "salon_bookings" not in st.session_state:
     st.session_state.salon_bookings = []
 
-# Tabs Configuration (English Headers)
+# Tabs Configuration
 tab1, tab2 = st.tabs(["📅 Book Appointment", "👑 Owner Dashboard"])
 
 with tab1:
@@ -127,7 +137,6 @@ with tab1:
 
     all_options = services_list + combos_list + ["ONLY TUESDAY OFFER (20% OFF)", "GROOM SPECIAL OFFER (₹2000)"]
 
-    # --- SAARI DETAILS AB ENGLISH MEIN HAI ---
     st.markdown('<div class="section-header">📝 Enter Your Details</div>', unsafe_allow_html=True)
 
     customer_name = st.text_input("👤 Full Name", placeholder="Enter your full name here")
@@ -135,8 +144,9 @@ with tab1:
 
     selected_services = st.multiselect("✂️ Choose Services / Combos / Offers", all_options)
 
+    # UPDATED STYLIST SELECTION: '(Main)' REMOVED
     selected_barber = st.selectbox("💈 Select Your Stylist (Karigar)", [
-        "Mubarak (Main)",
+        "Mubarak",
         "Other Stylist 1",
         "Other Stylist 2",
         "Any Available"
