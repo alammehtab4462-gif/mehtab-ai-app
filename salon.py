@@ -90,10 +90,10 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# File to store data permanently on server
+# Permanent Storage File
 DB_FILE = "bookings_db.json"
 
-# Helper functions to handle permanent database
+# Safe Data Loading
 def load_bookings():
     if os.path.exists(DB_FILE):
         try:
@@ -103,26 +103,27 @@ def load_bookings():
             return []
     return []
 
+# Safe Data Saving
 def save_booking(new_data):
     current_bookings = load_bookings()
     current_bookings.append(new_data)
     with open(DB_FILE, "w") as f:
         json.dump(current_bookings, f, indent=4)
 
+# Safe Data Clearing
 def clear_all_bookings():
     if os.path.exists(DB_FILE):
         os.remove(DB_FILE)
 
-# Header Section
+# Header Branding
 st.markdown('<div class="salon-title">✂️ MASTER CUTZ SALON</div>', unsafe_allow_html=True)
 st.markdown('<div class="salon-owner">Owned by Khan Sahab</div>', unsafe_allow_html=True)
 st.markdown('<div class="salon-sub">Style That Makes You Stand Out | Book Your Slot</div>', unsafe_allow_html=True)
 
-# Tabs Configuration
+# Tabs
 tab1, tab2 = st.tabs(["📅 Book Appointment", "👑 Owner Dashboard"])
 
 with tab1:
-    # 1. Standard Services Menu
     st.markdown('<div class="section-header">📜 Our Menu & Price List</div>', unsafe_allow_html=True)
     
     services_list = [
@@ -139,7 +140,6 @@ with tab1:
     st.markdown('<div class="service-box"><b>🌟 Grooming & Spa</b><br>Clean Up: ₹50 | Hair Spa: ₹500/₹900 | Facial: ₹600/₹1100</div>', unsafe_allow_html=True)
     st.markdown('<div class="service-box"><b>🔥 Styling & Colors</b><br>Hair Color: ₹250 | Special Color: ₹800 | Straightening: ₹1200</div>', unsafe_allow_html=True)
 
-    # 2. Mastercutz Special Combos
     st.markdown('<div class="section-header">⭐ Mastercutz Special Combos</div>', unsafe_allow_html=True)
     combos_list = [
         "Combo 1: Hair + Beard + D Tan + Head Massage (₹350)",
@@ -151,7 +151,6 @@ with tab1:
     st.markdown('<div class="service-box"><b>🎁 Hair Cut + Beard Cut + Color</b><br>Price: ₹350</div>', unsafe_allow_html=True)
     st.markdown('<div class="service-box"><b>🎁 Hair Cut + Beard Cut + Color + D Tan</b><br>Price: ₹500</div>', unsafe_allow_html=True)
 
-    # 3. Special Offers Display
     st.markdown('<div class="section-header">💥 Special Offers Only for You</div>', unsafe_allow_html=True)
     st.markdown('<div class="offer-box"><b style="color: #F59E0B; font-size: 16px;">📅 ONLY TUESDAY OFFER</b><br><span style="font-size: 20px; font-weight: bold; color: #34D399;">20% OFF</span> ON TOTAL BILL</div>', unsafe_allow_html=True)
     st.markdown('<div class="offer-box"><b style="color: #F59E0B; font-size: 16px;">🤵 GROOM SPECIAL OFFER</b><br>Complete Package for <span style="font-size: 18px; font-weight: bold; color: #34D399;">₹2000/- Only</span></div>', unsafe_allow_html=True)
@@ -200,14 +199,13 @@ with tab1:
                 "status": "Confirmed ✅"
             }
             
-            # Permanently save data to server file
             save_booking(new_booking)
             
             raw_message = (
                 f"👋 *Master Cutz Salon - New Booking!*\n\n"
                 f"👤 *Customer Name:* {customer_name}\n"
                 f"📞 *Phone:* {customer_phone}\n"
-                f"✂️ *Selected Items:* {services_string}\n"
+                f"✂ *Selected Items:* {services_string}\n"
                 f"💈 *Stylist (Karigar):* {selected_barber}\n"
                 f"📅 *Date:* {str(booking_date)}\n"
                 f"⏰ *Time Slot:* {booking_time}\n\n"
@@ -223,7 +221,6 @@ with tab1:
 with tab2:
     st.markdown("### 👑 Today's Appointments (Permanent Salon Register)")
     
-    # Load bookings from file storage
     saved_bookings = load_bookings()
     
     if len(saved_bookings) == 0:
@@ -245,4 +242,3 @@ with tab2:
             clear_all_bookings()
             st.success("🧹 Register has been successfully cleared!")
             st.rerun()
- file contents here
