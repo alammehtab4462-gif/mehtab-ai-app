@@ -1,6 +1,8 @@
 import streamlit as st
 from datetime import datetime
 import urllib.parse
+import json
+import os
 
 # Page Configuration for Mobile View Look
 st.set_page_config(page_title="Master Cutz Salon", page_icon="✂️", layout="centered")
@@ -88,14 +90,33 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Header Section (Added Owner Name Here)
+# File to store data permanently on server
+DB_FILE = "bookings_db.json"
+
+# Helper functions to handle permanent database
+def load_bookings():
+    if os.path.exists(DB_FILE):
+        try:
+            with open(DB_FILE, "r") as f:
+                return json.load(f)
+        except:
+            return []
+    return []
+
+def save_booking(new_data):
+    current_bookings = load_bookings()
+    current_bookings.append(new_data)
+    with open(DB_FILE, "w") as f:
+        json.dump(current_bookings, f, indent=4)
+
+def clear_all_bookings():
+    if os.path.exists(DB_FILE):
+        os.remove(DB_FILE)
+
+# Header Section
 st.markdown('<div class="salon-title">✂️ MASTER CUTZ SALON</div>', unsafe_allow_html=True)
 st.markdown('<div class="salon-owner">Owned by Khan Sahab</div>', unsafe_allow_html=True)
 st.markdown('<div class="salon-sub">Style That Makes You Stand Out | Book Your Slot</div>', unsafe_allow_html=True)
-
-# Initialize database for Owner Dashboard (Register)
-if "salon_bookings" not in st.session_state:
-    st.session_state.salon_bookings = []
 
 # Tabs Configuration
 tab1, tab2 = st.tabs(["📅 Book Appointment", "👑 Owner Dashboard"])
@@ -144,7 +165,6 @@ with tab1:
 
     selected_services = st.multiselect("✂️ Choose Services / Combos / Offers", all_options)
 
-    # UPDATED STYLIST SELECTION: '(Main)' REMOVED
     selected_barber = st.selectbox("💈 Select Your Stylist (Karigar)", [
         "Mubarak",
         "Other Stylist 1",
@@ -179,7 +199,9 @@ with tab1:
                 "time": booking_time,
                 "status": "Confirmed ✅"
             }
-            st.session_state.salon_bookings.append(new_booking)
+            
+            # Permanently save data to server file
+            save_booking(new_booking)
             
             raw_message = (
                 f"👋 *Master Cutz Salon - New Booking!*\n\n"
@@ -199,12 +221,15 @@ with tab1:
             st.markdown(f'<a href="{whatsapp_url}" target="_blank" class="whatsapp-btn">💬 Send Booking on WhatsApp</a>', unsafe_allow_html=True)
 
 with tab2:
-    st.markdown("### 👑 Today's Appointments (Salon Register)")
+    st.markdown("### 👑 Today's Appointments (Permanent Salon Register)")
     
-    if len(st.session_state.salon_bookings) == 0:
+    # Load bookings from file storage
+    saved_bookings = load_bookings()
+    
+    if len(saved_bookings) == 0:
         st.info("📭 No new bookings for today yet.")
     else:
-        for idx, booking in enumerate(st.session_state.salon_bookings):
+        for idx, booking in enumerate(saved_bookings):
             st.markdown(f"""
             <div style="background-color: #1F2937; padding: 15px; border-radius: 10px; margin-bottom: 10px; border: 1px solid #374151;">
                 <h4>{idx+1}. {booking['name']} ({booking['time']})</h4>
@@ -217,5 +242,7 @@ with tab2:
             """, unsafe_allow_html=True)
             
         if st.button("🗑️ Reset Register (Clear All Bookings)", use_container_width=True):
-            st.session_state.salon_bookings = []
+            clear_all_bookings()
+            st.success("🧹 Register has been successfully cleared!")
             st.rerun()
+ file contents here
