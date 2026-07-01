@@ -1,62 +1,4 @@
-import streamlit as st
 
-# Page configuration for a professional tech look
-st.set_page_config(page_title="Cute Let Prompt - Premium AI Hub", page_icon="✨", layout="centered")
-
-# Premium Custom CSS for Professional Dark-Gold Theme
-st.markdown("""
-    <style>
-    .stApp {
-        background-color: #0F172A;
-        color: #E2E8F0;
-    }
-    .main-title {
-        font-size: 32px;
-        font-weight: 800;
-        color: #F59E0B;
-        text-align: center;
-        margin-bottom: 2px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-    }
-    .sub-title {
-        font-size: 13px;
-        color: #94A3B8;
-        text-align: center;
-        margin-bottom: 30px;
-        font-weight: 500;
-    }
-    .card {
-        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
-        padding: 18px;
-        border-radius: 14px;
-        border: 1px solid #334155;
-        border-left: 6px solid #F59E0B;
-        margin-bottom: 20px;
-    }
-    .tag-boy {
-        background-color: #1E3A8A;
-        color: #93C5FD;
-        padding: 3px 10px;
-        border-radius: 20px;
-        font-size: 11px;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-    .tag-girl {
-        background-color: #701A75;
-        color: #F472B6;
-        padding: 3px 10px;
-        border-radius: 20px;
-        font-size: 11px;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-    .tag-special {
-        background-color: #991B1B;
-        color: #FECACA;
-        padding: 3px 10px;
-        border-radius: 20px;
         font-size: 11px;
         font-weight: bold;
         text-transform: uppercase;
@@ -152,4 +94,4 @@ for item in prompts_data:
     st.image(item['image_url'], use_container_width=True)
     st.markdown("**📋 Copy Prompt:**")
     st.code(item['prompt'], language="text")
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True
