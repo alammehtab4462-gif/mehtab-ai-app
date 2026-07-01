@@ -1,50 +1,117 @@
-https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=500",
-        "prompt": "Enhance this photo. Keep the person's exact original face shape, facial features, expressions, and skin tone 100% unchanged. Modify only the background and clothing: place him on a futuristic Tokyo street at night with glowing blue and purple neon lights, light rain reflections on the ground. Change his outfit to a premium black techwear cyberpunk jacket. High-end cinematic lighting, ultra-realistic, 4K resolution, photorealistic."
+import streamlit as st
+
+# Page configuration for a professional tech look
+st.set_page_config(page_title="Cute Let Prompt - Premium AI Hub", page_icon="✨", layout="centered")
+
+# Premium Custom CSS for Professional Dark-Gold Theme
+st.markdown("""
+    <style>
+    .stApp {
+        background-color: #0F172A;
+        color: #E2E8F0;
+    }
+    .main-title {
+        font-size: 32px;
+        font-weight: 800;
+        color: #F59E0B;
+        text-align: center;
+        margin-bottom: 2px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    .sub-title {
+        font-size: 13px;
+        color: #94A3B8;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 500;
+    }
+    .card {
+        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+        padding: 18px;
+        border-radius: 14px;
+        border: 1px solid #334155;
+        border-left: 6px solid #F59E0B;
+        margin-bottom: 20px;
+    }
+    .tag-boy {
+        background-color: #1E3A8A;
+        color: #93C5FD;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    .tag-girl {
+        background-color: #701A75;
+        color: #F472B6;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Website Header Section
+st.markdown('<div class="main-title">✨ CUTE LET PROMPT ✨</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title">Premium 4K AI Prompts | Keep Original Face, Change Style Perfectly</div>', unsafe_allow_html=True)
+
+# 10 Brand New Trending Prompts Data (5 Boys, 5 Girls)
+prompts_data = [
+    # --- BOYS TRENDING PROMPTS ---
+    {
+        "title": "1. Double Exposure Black & White Poster Style", "type": "Boy",
+        "image_url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500",
+        "prompt": "Modify this photo into a trending dual-exposure poster design. Keep the person's exact original face shape, facial features, expressions, and skin tone 100% unchanged. In the background, create a large, faded, close-up profile portrait of his original face in black and white with sunglasses. In the foreground, show his full-body figure standing confidently, dressed in a sharp black-and-white ombré shaded button-up shirt and clean white trousers. Soft professional background blur, elegant typography elements, high contrast, cinematic look, 4K resolution."
     },
     {
-        "title": "2. Royal Indian Ethnic Look", "type": "Boy",
-        "image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500",
-        "prompt": "Enhance this photo. Do not alter the face, eyes, lips, or hair features of the original person. Keep the face 100% original. Change the attire to a rich luxury gold and maroon embroidered Sherwani. Change the background to a grand royal palace hallway with soft warm chandelier lighting and elegant pillars. Masterpiece, ultra-sharp detail, 4K quality."
-    },
-    {
-        "title": "3. Luxury CEO Executive Vibe", "type": "Boy",
-        "image_url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500",
-        "prompt": "Enhance this photo. Keep the original face and skin textures completely intact without any changes. Alter the background to a high-end luxury corporate office overlooking a skyscraper city skyline at sunset. Dress the person in a perfectly tailored dark charcoal grey slim-fit tuxedo with a crisp white shirt. Professional corporate studio lighting, 8k resolution, sharp focus."
-    },
-    {
-        "title": "4. Cinematic Desert Rider Look", "type": "Boy",
-        "image_url": "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?w=500",
-        "prompt": "Enhance this photo. Maintain the original face, facial hair, and look of the person completely. Place him in a scenic golden hour desert landscape next to a vintage cafe racer motorcycle. Outfit changed to a rugged premium brown leather jacket over a black t-shirt. Dramatic cinematic sun rays, hyper-realistic texture, 4K resolution."
-    },
-    {
-        "title": "5. Vintage Retro 90s Aesthetic", "type": "Boy",
+        "title": "2. Neon Cyberpunk Dual Portrait Look", "type": "Boy",
         "image_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500",
-        "prompt": "Enhance this photo. The face must remain entirely original and unchanged. Change the setting to a retro 1990s aesthetic street cafe with vintage cars blurred in the background. Dress the person in a stylish oversized vintage denim jacket. Soft nostalgic film grain effect, warm color grading, cinematic editorial portrait style, ultra HD."
+        "prompt": "Enhance this photo into a premium double exposure neon edit. Preserve the exact original face and facial hair of the boy completely. Background shows a giant, artistic, semi-transparent close-up of his original face with neon blue reflections. Foreground features his sharp full-body shot wearing a modern neon-accented techwear jacket, standing on a rainy street in Tokyo. Glowing cyan and pink lights, hyper-realistic texture, ultra-sharp focus, 8k resolution."
     },
     {
-        "title": "6. Angelic Fairy White Gown Look", "type": "Girl",
-        "image_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500",
-        "prompt": "Enhance this photo. Keep the girl's original face, eyes, facial structure, and smile 100% identical and unchanged. Change only the surroundings and outfit: dress her in a breathtaking, glowing white luxury fairy gown. Place her in an enchanted magical forest background with soft glowing fireflies and golden light rays filtering through ancient trees. Soft focus, ethereal cinematic lighting, 4K resolution."
+        "title": "3. Sunset Mountain Double Exposure Look", "type": "Boy",
+        "image_url": "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?w=500",
+        "prompt": "Transform this image. Keep the face, hair texture, and natural expressions 100% identical and original. Background features a magnificent, massive faded close-up portrait of his face overlapping a dramatic golden sunset and mountain peaks. Foreground shows him standing on a wooden deck in a stylish open dark shirt over a t-shirt. Moody warm color grading, cinematic atmosphere, 4K resolution."
     },
     {
-        "title": "7. Royal Traditional Lehenga Look", "type": "Girl",
+        "title": "4. Royal Luxury Velvet Vibe Poster", "type": "Boy",
+        "image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500",
+        "prompt": "Create a luxury fashion poster from this photo. The original face must remain completely unaltered. Background is a massive, elegant close-up of his original face faded with warm studio lights. Foreground features him wearing a premium dark royal blue velvet blazer over a crisp white shirt. Palace bokeh background, highly detailed texture, high fashion look, ultra HD."
+    },
+    {
+        "title": "5. Vintage Retro Film Dual Edit", "type": "Boy",
+        "image_url": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=500",
+        "prompt": "Modify this photo into a 90s retro cinematic poster. Face and skin details must remain 100% original. Background has a huge, artistic faded portrait of his face looking sideways with vintage sunglasses. Foreground shows him standing next to a vintage car in a cool oversized denim jacket. Warm nostalgic film grain, professional lighting, look like an aesthetic movie poster, 4k."
+    },
+    # --- GIRLS TRENDING PROMPTS ---
+    {
+        "title": "6. Beautiful Cloud Mountain Double Exposure", "type": "Girl",
         "image_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500",
-        "prompt": "Enhance this photo. Keep the face, skin tone, and expressions completely original without any modifications. Dress her in a majestic, highly-detailed royal emerald green and gold embroidered bridal Lehenga with elegant traditional jewelry. The background should be a luxury heritage palace balcony during a grand evening event with soft bokeh lights. High-end fashion photography, 8k resolution."
+        "prompt": "Modify this photo into a viral creative aesthetic edit. Keep the girl's original face shape, eyes, lips, and smile 100% identical and unchanged. In the background, create a large, beautiful close-up of her original face wearing stylish round sunglasses, softly blending into a cloudy sky and distant misty mountains. In the foreground, show her full figure walking on a rustic wooden bridge, dressed in a trendy loose pink shirt and white wide-leg trousers. Elegant gold earrings, artistic presentation, soft cinematic lighting, 4K clear resolution."
     },
     {
-        "title": "8. Modern Luxury Street Fashion", "type": "Girl",
-        "image_url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500",
-        "prompt": "Enhance this photo. Preserve the exact original face and natural features of the girl. Change the outfit to a chic high-fashion beige trench coat with a modern black turtleneck sweater. Place her on a classy street in Paris with the Eiffel tower beautifully blurred in the background. Magazine cover style lighting, photorealistic, sharp details, 4K."
+        "title": "7. Angelic Ethereal Glow Dual Portrait", "type": "Girl",
+        "image_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500",
+        "prompt": "Transform this image into a magical double exposure portrait. Do not alter her original face or natural expressions. Background shows a grand, dreamlike faded profile of her original face looking up into golden sun rays. Foreground shows her full body standing in a beautiful, flowing white aesthetic gown surrounded by glowing soft-focus lights. Masterpiece, hyper-detailed, 8k quality."
     },
     {
-        "title": "9. Cyber-Princess Neon Cyberpunk", "type": "Girl",
+        "title": "8. Cyberpunk Neon Queen Poster", "type": "Girl",
         "image_url": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500",
-        "prompt": "Enhance this photo. Do not alter the girl's original face, expressions, or features. Modify the outfit into a futuristic sleek black and glowing pink cybernetic jacket. Background is a neon-lit cyberpunk city rooftop at night with futuristic drones and neon glowing advertisements blurred in the distance. Cinematic dynamic lighting, ultra HD, hyper-detailed."
+        "prompt": "Create a futuristic double exposure edit. Preserve the girl's exact original facial structure and smile. Background features a giant close-up profile of her face with glowing purple neon lighting lines. Foreground shows her in a sleek black leather outfit under rainy city neon signs. High-contrast color grading, photorealistic, cinematic edge, 4K resolution."
     },
     {
-        "title": "10. Cozy Autumn Coffee Shop Aesthetic", "type": "Girl",
+        "title": "9. Autumn Leaves Double Exposure Vibe", "type": "Girl",
+        "image_url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500",
+        "prompt": "Modify this photo into a warm aesthetic poster. Face must remain entirely original without changes. Background features a large, artistic faded portrait of her face gently blending with falling orange autumn leaves and a blurry forest path. Foreground displays her full figure wearing a cozy beige trench coat and a knitted scarf. Rich textures, moody soft lighting, ultra HD."
+    },
+    {
+        "title": "10. Luxury Studio Vogue Style Dual Edit", "type": "Girl",
         "image_url": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500",
-        "prompt": "Enhance this photo. The original face and natural skin textures must be kept 100% unchanged. Change the setting to a beautiful, cozy indoor coffee shop next to a rain-covered glass window with autumn leaves outside. Dress her in a soft, premium oversized woolen knitted sweater holding a steaming coffee mug. Warm moody lighting, beautiful bokeh, photorealistic, 4K."
+        "prompt": "Transform this photo into a professional high-fashion magazine cover layout. Keep the original face and skin texture completely untouched. Background displays a massive, high-contrast monochrome (black & white) faded close-up of her original face. Foreground shows her full-body pose in a vibrant luxury emerald green silk dress with dramatic soft-box studio lighting. Sharp focus, flawless professional design, 4K resolution."
     }
 ]
 
