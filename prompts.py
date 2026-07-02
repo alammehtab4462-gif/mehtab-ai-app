@@ -34,6 +34,15 @@ st.markdown("""
         border-left: 6px solid #F59E0B;
         margin-bottom: 20px;
     }
+    .tag-trending {
+        background-color: #059669;
+        color: #A7F3D0;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
     .tag-boy {
         background-color: #1E3A8A;
         color: #93C5FD;
@@ -52,46 +61,37 @@ st.markdown("""
         font-weight: bold;
         text-transform: uppercase;
     }
-    .tag-special {
-        background-color: #991B1B;
-        color: #FECACA;
-        padding: 3px 10px;
-        border-radius: 20px;
-        font-size: 11px;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
     </style>
 """, unsafe_allow_html=True)
 
 # Website Header Section
 st.markdown('<div class="main-title">✨ CUTE LET PROMPT ✨</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-title">Premium 4K AI Prompts | Keep Original Face, Change Style Perfectly</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title">Premium 4K AI Prompts | Viral Instagram & Reels Photo Editing Trends</div>', unsafe_allow_html=True)
 
-# 12 Premium Trending Prompts Data (With Your Exact Uploaded Image Links!)
+# 12 Instagram Viral Trends Prompts Data
 prompts_data = [
-    # --- SPECIAL BANNER / TRENDING PROMPTS ---
+    # --- TOP REELS VIRAL TRENDS (FROM VIDEO) ---
     {
-        "title": "1. Patriotic Bhagat Singh Style Abstract Art", "type": "Special",
-        "image_url": "https://raw.githubusercontent.com/alammehtab4462-gif/mehtab-ai-app/main/1000079586.jpg",
-        "prompt": "Create a powerful, inspiring patriotic portrait from this photo. Modify the subject's outfit and styling to resemble the iconic revolutionary freedom fighter Bhagat Singh, wearing his classic vintage fedora hat and mustache. The subject's face shape and core features must remain completely recognizable and realistic. The background must be a striking, intense scarlet red dynamic abstract watercolor and ink sketch texture, with a bold silhouette of a raised fist symbolizing strength and freedom. Highly artistic, emotional, cinematic lighting, 4K resolution masterwork."
-    },
-    {
-        "title": "2. Romantic K-Drama Rainy Day Aesthetic Hug", "type": "Special",
-        "image_url": "https://raw.githubusercontent.com/alammehtab4462-gif/mehtab-ai-app/main/1000079493.jpg",
-        "prompt": "A beautiful cinematic wide shot of a romantic couple embracing tightly on a rainy evening at a nostalgic rural Japanese train station platform. The girl wears a stylish dark jacket and heels, and the boy wears a white button-up shirt and gray trousers. Lush green trees and small yellow flowers are visible along the platform edge. The atmosphere is filled with a soft rain mist, puddles reflecting the dim ambient station lights, and a moody, highly emotional blue-green cinematic color grade like a modern romance film."
-    },
-    {
-        "title": "3. Double Exposure Black & White Poster Style", "type": "Boy",
+        "title": "1. Instagram Multi-Layer Aesthetic Triple Exposure", "type": "Trending",
         "image_url": "https://raw.githubusercontent.com/alammehtab4462-gif/mehtab-ai-app/main/1000078736.jpg",
-        "prompt": "Modify this photo into a trending dual-exposure poster design. Keep the person's exact original face shape, facial features, expressions, and skin tone 100% unchanged. In the background, create a large, faded, close-up profile portrait of his original face in black and white with sunglasses. In the foreground, show his full-body figure standing confidently, dressed in a sharp black-and-white ombré shaded button-up shirt and clean white trousers. Soft professional background blur, elegant typography elements, high contrast, cinematic look, 4K resolution."
+        "prompt": "Create a viral Instagram trending triple-exposure portrait from this photo. The subject's exact original face, facial features, expressions, and natural skin tone must remain 100% identical and unchanged. The background features a large, artistic, semi-transparent profile portrait of the face with sharp sunglasses. In the center, blend a medium shot looking directly at the camera. In the foreground, show the full-body figure standing confidently, dressed in a stylish pastel pink button-up shirt and clean white trousers. Soft moody background blur, high-contrast professional editing, hyper-realistic film texture, cinematic look, 4K resolution."
     },
     {
-        "title": "4. Beautiful Cloud Mountain Double Exposure", "type": "Girl",
+        "title": "2. Royal Golden Birthday Special Poster Trend", "type": "Trending",
         "image_url": "https://raw.githubusercontent.com/alammehtab4462-gif/mehtab-ai-app/main/1000078737.jpg",
-        "prompt": "Modify this photo into a viral creative aesthetic edit. Keep the girl's original face shape, eyes, lips, and smile 100% identical and unchanged. In the background, create a large, beautiful close-up of her original face wearing stylish round sunglasses, softly blending into a cloudy sky and distant misty mountains. In the foreground, show her full figure walking on a rustic wooden bridge, dressed in a trendy loose pink shirt and white wide-leg trousers. Elegant gold earrings, artistic presentation, soft cinematic lighting, 4K clear resolution."
+        "prompt": "Transform this image into a premium viral Instagram Birthday poster edit. Keep the subject's original face shape, eyes, lips, and smile completely unaltered. Layer 1 (Background): A massive close-up portrait of the person faded with elegant warm studio lights. Layer 2 (Foreground): A sharp full-body shot wearing an ultra-stylish outfit. The background is a beautiful rich abstract brown and golden watercolor paint stroke texture with realistic particle dust. Feature premium cursive typography text at the top reading 'HAPPY Birthday stylish pic'. Cinematic lighting, luxury aesthetic vibe, ultra HD."
     },
-    # --- BOYS TRENDING PROMPTS ---
+    {
+        "title": "3. Instagram Viral Name Art Crown Edit (Aanya Style)", "type": "Trending",
+        "image_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500",
+        "prompt": "Create a viral CapCut trend overlay portrait. Keep the girl's original face structure and facial details 100% identical. The background is a dark, moody forest with orange and gold butterflies flying around. Combine a huge, faded close-up portrait of her wearing luxury sunglasses with a clear foreground shot. Above the foreground character, add clean, sharp typography text that reads 'Aanya' with a smaller subtitle 'Aanya editz' underneath, topped with a glowing minimalist golden crown icon. High fashion, cinematic lighting, 4K resolution."
+    },
+    {
+        "title": "4. Instagram Viral Name Art Crown Edit (Arjun Style)", "type": "Trending",
+        "image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500",
+        "prompt": "Create a trending Instagram Reels male portrait. Keep the original face, hair texture, and natural smile 100% identical. Dual exposure blend: a faded overhead close-up portrait combined with a sharp foreground shot. The background is an artistic dark grunge texture with dynamic golden bokeh sparkles. Feature bold, modern typography text above the shoulder reading 'ARJUN' and a stylized script text 'Arjun editz' below it with a royal crown vector element. Sharp focus, high contrast, cinematic poster look."
+    },
+    # --- BOYS HIGH-ENGAGEMENT PROMPTS ---
     {
         "title": "5. Neon Cyberpunk Dual Portrait Look", "type": "Boy",
         "image_url": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500",
@@ -103,20 +103,20 @@ prompts_data = [
         "prompt": "Transform this image. Keep the face, hair texture, and natural expressions 100% identical and original. Background features a magnificent, massive faded close-up portrait of his face overlapping a dramatic golden sunset and mountain peaks. Foreground shows him standing on a wooden deck in a stylish open dark shirt over a t-shirt. Moody warm color grading, cinematic atmosphere, 4K resolution."
     },
     {
-        "title": "7. Royal Luxury Velvet Vibe Poster", "type": "Boy",
-        "image_url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500",
-        "prompt": "Create a luxury fashion poster from this photo. The original face must remain completely unaltered. Background is a massive, elegant close-up of his original face faded with warm studio lights. Foreground features him wearing a premium dark royal blue velvet blazer over a crisp white shirt. Palace bokeh background, highly detailed texture, high fashion look, ultra HD."
+        "title": "7. Patriotic Bhagat Singh Style Abstract Art", "type": "Boy",
+        "image_url": "https://raw.githubusercontent.com/alammehtab4462-gif/mehtab-ai-app/main/1000079586.jpg",
+        "prompt": "Create a powerful, inspiring patriotic portrait from this photo. Modify the subject's outfit and styling to resemble the iconic revolutionary freedom fighter Bhagat Singh, wearing his classic vintage fedora hat and mustache. The subject's face shape and core features must remain completely recognizable and realistic. The background must be a striking, intense scarlet red dynamic abstract watercolor and ink sketch texture, with a bold silhouette of a raised fisted glove symbolizing strength. Cinematic lighting, 4K resolution masterwork."
     },
     {
         "title": "8. Vintage Retro Film Dual Edit", "type": "Boy",
         "image_url": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=500",
         "prompt": "Modify this photo into a 90s retro cinematic poster. Face and skin details must remain 100% original. Background has a huge, artistic faded portrait of his face looking sideways with vintage sunglasses. Foreground shows him standing next to a vintage car in a cool oversized denim jacket. Warm nostalgic film grain, professional lighting, look like an aesthetic movie poster, 4k."
     },
-    # --- GIRLS TRENDING PROMPTS ---
+    # --- GIRLS HIGH-ENGAGEMENT PROMPTS ---
     {
-        "title": "9. Angelic Ethereal Glow Dual Portrait", "type": "Girl",
-        "image_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500",
-        "prompt": "Transform this image into a magical double exposure portrait. Do not alter her original face or natural expressions. Background shows a grand, dreamlike faded profile of her original face looking up into golden sun rays. Foreground shows her full body standing in a beautiful, flowing white aesthetic gown surrounded by glowing soft-focus lights. Masterpiece, hyper-detailed, 8k quality."
+        "title": "9. Romantic K-Drama Rainy Day Aesthetic Hug", "type": "Girl",
+        "image_url": "https://raw.githubusercontent.com/alammehtab4462-gif/mehtab-ai-app/main/1000079493.jpg",
+        "prompt": "A beautiful cinematic wide shot of a romantic couple embracing tightly on a rainy evening at a nostalgic rural Japanese train station platform. The girl wears a stylish dark jacket and heels, and the boy wears a white button-up shirt and gray trousers. Lush green trees and small yellow flowers are visible along the platform edge. The atmosphere is filled with a soft rain mist, puddles reflecting the dim ambient station lights, and a moody, highly emotional blue-green cinematic color grade like a modern romance film."
     },
     {
         "title": "10. Cyberpunk Neon Queen Poster", "type": "Girl",
@@ -135,21 +135,25 @@ prompts_data = [
     }
 ]
 
-# Display
+# Display Loop with Fallback Option
 for item in prompts_data:
     st.markdown('<div class="card">', unsafe_allow_html=True)
     col1, col2 = st.columns([1, 4])
     with col1:
-        if item['type'] == "Boy":
+        if item['type'] == "Trending":
+            st.markdown('<span class="tag-trending">🔥 Viral Trend</span>', unsafe_allow_html=True)
+        elif item['type'] == "Boy":
             st.markdown('<span class="tag-boy">♂ Boy</span>', unsafe_allow_html=True)
-        elif item['type'] == "Girl":
-            st.markdown('<span class="tag-girl">♀ Girl</span>', unsafe_allow_html=True)
         else:
-            st.markdown('<span class="tag-special">🔥 Special</span>', unsafe_allow_html=True)
+            st.markdown('<span class="tag-girl">♀ Girl</span>', unsafe_allow_html=True)
     with col2:
         st.markdown(f"#### {item['title']}")
         
-    st.image(item['image_url'], use_container_width=True)
+    try:
+        st.image(item['image_url'], use_container_width=True)
+    except:
+        st.info("💡 Image preview is processing, look at the premium prompt below!")
+        
     st.markdown("**📋 Copy Prompt:**")
     st.code(item['prompt'], language="text")
     st.markdown('</div>', unsafe_allow_html=True)
